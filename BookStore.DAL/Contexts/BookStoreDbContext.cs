@@ -13,9 +13,9 @@ namespace BookStore.DAL.Contexts
         public BookStoreDbContext(DbContextOptions <BookStoreDbContext> options) : base(options) 
         { 
         }
-        DbSet<Book> Books { get; set; }
-        DbSet<Category> Categories { get; set; }
-        DbSet<CoverType> CoverTypes { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<CoverType> CoverTypes { get; set; }
 
     }
 }

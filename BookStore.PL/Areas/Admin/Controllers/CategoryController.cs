@@ -1,15 +1,16 @@
-﻿using BookStore.BLL.Repositories;
+﻿using BookStore.BLL.Interfaces;
+using BookStore.BLL.Repositories;
 using BookStore.DAL;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace BookStore.PL.Controllers
+namespace BookStore.PL.Areas.Admin.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly UnitOfWork _unitofwork;
+        private readonly IUnitOfWork _unitofwork;
 
-        public CategoryController(UnitOfWork unitofwork) //Ask clr to create obj from class which implement ICategoryRepository
+        public CategoryController(IUnitOfWork unitofwork) //Ask clr to create obj from class which implement ICategoryRepository
         {
             _unitofwork = unitofwork;
         }
@@ -25,7 +26,7 @@ namespace BookStore.PL.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Category category)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 await _unitofwork.CategoryRepository.CreateAsync(category);
                 int result = await _unitofwork.CompleteAsync();
@@ -41,9 +42,9 @@ namespace BookStore.PL.Controllers
             if (id is null)
                 return BadRequest();
             var category = await _unitofwork.CategoryRepository.GetByIdAsync(id.Value);
-            if(category is null)
+            if (category is null)
                 return NotFound();
-            return View(ViewName,category);
+            return View(ViewName, category);
         }
         public async Task<IActionResult> Edit(int? id)
         {
@@ -74,9 +75,9 @@ namespace BookStore.PL.Controllers
             return View(category);
         }
 
-        public async Task <IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            return await Details(id,"Delete");
+            return await Details(id, "Delete");
         }
         [HttpPost]
         public async Task<IActionResult> Delete(Category category, [FromRoute] int id)
