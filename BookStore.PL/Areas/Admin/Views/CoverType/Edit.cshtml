@@ -1,0 +1,42 @@
+﻿@model CoverType
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h2 class="text-center my-3">Edit Cover</h2>
+<br />
+<br />
+
+<form method="post" asp-controller="CoverType" asp-action="Edit" enctype="multipart/form-data">
+    <div class="row border p-3 mt-4 ">
+
+        <div class="row pb-2 ">
+            <h2 class="text-primary">Edit Cover</h2>
+            <hr />
+        </div>
+        <input asp-for="CoverTypeId" hidden />
+        <div asp-validation-summary=All></div>
+
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+
+        <div class="mb-3 col-6 ">
+            <button type="submit" class="btn btn-warning" style="width:150px">Edit</button>|
+            <a asp-action="Index" class="btn btn-outline-secondary">Back To List</a>
+        </div>
+
+
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+
+    }
+}
