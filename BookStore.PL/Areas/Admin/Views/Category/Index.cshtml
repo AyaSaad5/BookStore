@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CategoryViewModel>
+@{
+    ViewData["Title"] = "All Categories";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+@if(TempData["Message"] is not null)
+{
+    <div id="div1" class="alert alert-warning"> 
+        @TempData["Message"]
+    </div>
+}
+<br />
+<a asp-action="Create" class="btn btn-success" > Create New Category</a>
+<br />
+
+@if(Model.Count() > 0)
+{
+    <h1>All Categories</h1>
+    <br />
+    <table class=" table table-hover table-striped mt-3">
+        <thead>
+            <td>@Html.DisplayNameFor(C => C.Name)</td>
+            <td>@Html.DisplayNameFor(C => C.DisplayOrder)</td>
+            <td>@Html.DisplayNameFor(C => C.DateTimeOfCreation)</td>
+            <td>Details</td>
+            <td>Update</td>
+            <td>Delete</td>
+        </thead>
+        <tbody>
+            @foreach(var category in Model)
+            {
+                <tr>
+                    <td>@category.Name</td>
+                    <td>@category.DisplayOrder</td>
+                    <td>@category.DateTimeOfCreation</td>
+                   <partial name="_ButtonsView" model="@category.CategoryId"/>
+                </tr>
+            }
+           
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="mt-5 alert alert-warning"> 
+        There is No Categories
+    </div>
+}

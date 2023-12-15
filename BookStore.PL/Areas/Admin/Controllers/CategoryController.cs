@@ -1,7 +1,11 @@
-﻿using BookStore.BLL.Interfaces;
+﻿using AutoMapper;
+using BookStore.BLL.Interfaces;
 using BookStore.BLL.Repositories;
 using BookStore.DAL;
+using BookStore.PL.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BookStore.PL.Areas.Admin.Controllers
@@ -9,32 +13,36 @@ namespace BookStore.PL.Areas.Admin.Controllers
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitofwork;
+        private readonly IMapper _mapper;
 
-        public CategoryController(IUnitOfWork unitofwork) //Ask clr to create obj from class which implement ICategoryRepository
+        public CategoryController(IUnitOfWork unitofwork, IMapper mapper) //Ask clr to create obj from class which implement ICategoryRepository
         {
             _unitofwork = unitofwork;
+            _mapper = mapper;
         }
         public async Task<IActionResult> Index()
         {
             var categories = await _unitofwork.CategoryRepository.GetAllAsync();
-            return View(categories);
+            var MappedCategories = _mapper.Map<IEnumerable<Category>, IEnumerable<CategoryViewModel>>(categories);
+            return View(MappedCategories);
         }
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Category category)
+        public async Task<IActionResult> Create(CategoryViewModel categoryvm)
         {
             if (ModelState.IsValid)
             {
-                await _unitofwork.CategoryRepository.CreateAsync(category);
+                var MappedCategory = _mapper.Map<CategoryViewModel, Category>(categoryvm);
+                await _unitofwork.CategoryRepository.CreateAsync(MappedCategory);
                 int result = await _unitofwork.CompleteAsync();
                 if (result > 0)
                     TempData["Message"] = "Category is Created ";
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(categoryvm);
         }
 
         public async Task<IActionResult> Details(int? id, string ViewName = "Details")
@@ -44,22 +52,24 @@ namespace BookStore.PL.Areas.Admin.Controllers
             var category = await _unitofwork.CategoryRepository.GetByIdAsync(id.Value);
             if (category is null)
                 return NotFound();
-            return View(ViewName, category);
+            var MappedCategory = _mapper.Map<Category,CategoryViewModel>(category);
+            return View(ViewName, MappedCategory);
         }
         public async Task<IActionResult> Edit(int? id)
         {
             return await Details(id, "Edit");
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(Category category, [FromRoute] int id)
+        public async Task<IActionResult> Edit(CategoryViewModel categoryvm, [FromRoute] int id)
         {
-            if (id != category.CategoryId)
+            if (id != categoryvm.CategoryId)
                 return BadRequest();
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _unitofwork.CategoryRepository.Update(category);
+                    var MappedCategory = _mapper.Map<CategoryViewModel, Category>(categoryvm);
+                    _unitofwork.CategoryRepository.Update(MappedCategory);
                     int result = await _unitofwork.CompleteAsync();
                     if (result > 0)
                         TempData["Message"] = "Edit Complete Successfully";
@@ -72,7 +82,7 @@ namespace BookStore.PL.Areas.Admin.Controllers
                     ModelState.AddModelError(string.Empty, ex.Message);
                 }
             }
-            return View(category);
+            return View(categoryvm);
         }
 
         public async Task<IActionResult> Delete(int? id)
@@ -80,13 +90,14 @@ namespace BookStore.PL.Areas.Admin.Controllers
             return await Details(id, "Delete");
         }
         [HttpPost]
-        public async Task<IActionResult> Delete(Category category, [FromRoute] int id)
+        public async Task<IActionResult> Delete(CategoryViewModel categoryvm, [FromRoute] int id)
         {
-            if (id != category.CategoryId)
+            if (id != categoryvm.CategoryId)
                 return BadRequest();
             try
             {
-                _unitofwork.CategoryRepository.Delete(category);
+                var MappedCategory = _mapper.Map<CategoryViewModel, Category>(categoryvm);
+                _unitofwork.CategoryRepository.Delete(MappedCategory);
                 int result = await _unitofwork.CompleteAsync();
                 if (result > 0)
                     TempData["Message"] = "Deleted Successfully";
@@ -95,7 +106,7 @@ namespace BookStore.PL.Areas.Admin.Controllers
             catch (System.Exception ex)
             {
                 ModelState.AddModelError(string.Empty, ex.Message);
-                return View(category);
+                return View(categoryvm);
             }
         }
 

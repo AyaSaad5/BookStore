@@ -1,0 +1,13 @@
+﻿@model CategoryViewModel
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h1>Details for @Model.Name Category</h1>
+<br />
+
+<partial name="PartialViews/_DeleteDetailsPartialView"/>
+<a asp-action="Edit" asp-route-id = "@Model.CategoryId" class="btn btn-primary">Edit</a>
+<a asp-action="Index" class="btn btn-secondary">Back To List</a>
+

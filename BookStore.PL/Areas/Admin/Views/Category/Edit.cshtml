@@ -1,0 +1,21 @@
+﻿@model CategoryViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h1>Edit @Model.Name Category</h1>
+<br />
+<form asp-action="Edit">
+
+<partial name="PartialViews/_CreateEditPartialView"/>
+<input type="submit" value="Save" class="btn btn-primary"/>
+<a asp-action="Index" class="btn btn-secondary" >Back To List</a>
+
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
+

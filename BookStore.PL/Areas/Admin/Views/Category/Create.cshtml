@@ -1,0 +1,20 @@
+﻿@model CategoryViewModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h1>Create New Category</h1>
+<br />
+<form asp-action="Create">
+    <partial name="PartialViews/_CreateEditPartialView"/>
+    <br />
+    <input type="submit" value="Submit" class="btn btn-primary"/>
+    <a asp-action="Index" class="btn btn-secondary" >Back To List</a>
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
+

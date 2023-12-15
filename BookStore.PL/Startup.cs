@@ -1,6 +1,7 @@
 using BookStore.BLL.Interfaces;
 using BookStore.BLL.Repositories;
 using BookStore.DAL.Contexts;
+using BookStore.PL.MappingProfiles;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +36,7 @@ namespace BookStore.PL
             }); //Allow Dependancy Injection
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddAutoMapper(M => M.AddProfile(new CategoryProfile()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
