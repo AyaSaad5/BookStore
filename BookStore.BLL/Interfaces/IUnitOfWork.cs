@@ -11,5 +11,6 @@ namespace BookStore.BLL.Interfaces
         public IBookRepository BookRepository { get; set; }
         public ICategoryRepository CategoryRepository { get; set; }
         public ICoverTypeRepository CoverTypeRepository { get; set; }
+        public Task<int> CompleteAsync();
     }
 }
