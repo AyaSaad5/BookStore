@@ -1,0 +1,56 @@
+﻿@model IEnumerable<CoverType>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+
+
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary"> Cover Types List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="CoverType" asp-action="Create" class="btn btn-outline-primary ">
+                <i class="bi bi-patch-plus"></i> &nbsp; Add New Cover Type
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<br />
+<br />
+
+<table class="table  table-bordered table-striped" style="width:100%">
+
+    <thead>
+        <tr>
+           
+            <th scope="col">Name</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var Cover  in Model)
+        {
+
+            <tr class="table-success">
+             
+                <td>@Cover.Name</td>
+
+                <td><a asp-action="Edit" asp-route-id="@Cover.CoverTypeId" class="btn btn-warning"><i class="bi bi-pencil-square"></i> Edit</a></td>
+                <td><a asp-action="Delete" asp-route-id="@Cover.CoverTypeId" class="btn btn-danger"><i class="bi bi-trash"></i> Delete</a> </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

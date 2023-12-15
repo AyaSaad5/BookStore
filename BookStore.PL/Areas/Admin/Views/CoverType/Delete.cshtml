@@ -1,0 +1,23 @@
+﻿@model CoverType
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+<br />
+<h2> You Are Going To Delete This Cover !! </h2>
+<br />
+
+<form asp-action="Delete">
+    <input hidden asp-for="CoverTypeId" />
+    
+    <div class="form-group mb-3">
+        <label asp-for="Name" class="col-form-label"></label>
+        <input asp-for="Name" class="form-control" readonly />
+    </div>
+    
+    <input type="submit" asp-action="Delete" class="btn btn-danger" value="Delete" /> |
+    <a asp-action="Index" class="btn btn-light">Back To List</a>
+</form>
+
