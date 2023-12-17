@@ -1,27 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using BookStore.DAL.Models;
+using BookStore.DAL;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
-namespace BookStore.DAL.Models
+namespace BookStore.PL.ViewModels
 {
-    public class Book
+    public class BookViewModel
     {
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Title is Required")]
         public string Title { get; set; }
         public string Description { get; set; }
         public string ISBN { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Author is Required")]
 
         public string Author { get; set; }
         public double Price { get; set; }
         public double Price5 { get; set; }
         public double Price10 { get; set; }
         public string ImageName { get; set; }
+        public IFormFile Image { get; set; }
 
         [ForeignKey("Category")]
         public int? CategoryId { get; set; } // Restrict

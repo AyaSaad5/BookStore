@@ -11,10 +11,14 @@ namespace BookStore.BLL.Repositories
 {
     public class BookRepository : GenericRepository<Book> , IBookRepository
     {
+        private readonly BookStoreDbContext _dbContext;
+
         public BookRepository(BookStoreDbContext dbContext) : base(dbContext) 
         {
-
+            _dbContext = dbContext;
         }
 
+        public IQueryable<Book> GetBookByName(string title)
+        => _dbContext.Books.Where(B => B.Title.ToLower().Contains(title.ToLower()));
     }
 }

@@ -30,7 +30,8 @@ namespace BookStore.BLL.Repositories
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            
+            if(typeof(T) == typeof(Book))
+                 return  (IEnumerable<T>) await _dbContext.Books.Include(C => C.Category).Include(CT => CT.CoverType).ToListAsync();
             return await _dbContext.Set<T>().ToListAsync();
         }
 

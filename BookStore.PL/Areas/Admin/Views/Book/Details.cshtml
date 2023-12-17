@@ -1,0 +1,15 @@
+﻿@model BookViewModel
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<br />
+<h1>Details about @Model.Title Book</h1>
+
+<br />
+<partial name="PartialViews/_DeleteDetailsPartialView" />
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+<a asp-action="Index" asp-controller="Book" class="btn btn-secondary">Back To List</a>
+

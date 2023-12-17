@@ -9,6 +9,6 @@ namespace BookStore.BLL.Interfaces
 {
     public interface IBookRepository : IGenericRepository<Book>
     {
-
+        IQueryable<Book> GetBookByName(string title);
     }
 }

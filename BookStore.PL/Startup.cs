@@ -1,3 +1,4 @@
+using AutoMapper;
 using BookStore.BLL.Interfaces;
 using BookStore.BLL.Repositories;
 using BookStore.DAL.Contexts;
@@ -36,7 +37,7 @@ namespace BookStore.PL
             }); //Allow Dependancy Injection
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddAutoMapper(M => M.AddProfile(new CategoryProfile()));
+            services.AddAutoMapper(M => M.AddProfiles(new List <Profile>() { new CategoryProfile(), new BookProfile() }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

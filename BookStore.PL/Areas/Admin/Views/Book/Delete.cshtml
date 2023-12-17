@@ -1,0 +1,18 @@
+﻿@model BookViewModel
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<br />
+<h1> Are you Sure To Delete This Book </h1>
+<br />
+<form asp-action="Delete">
+
+    <partial name="PartialViews/_DeleteDetailsPartialView" />
+
+    <input type="submit" value="Delete" class="btn btn-primary" />
+    <a asp-action="Index" asp-controller="Book" class="btn btn-light">Cancel</a>
+
+</form>
+

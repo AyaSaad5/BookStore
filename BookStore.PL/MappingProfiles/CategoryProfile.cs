@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookStore.DAL;
+using BookStore.PL.ViewModels;
 
 namespace BookStore.PL.MappingProfiles
 {
@@ -7,7 +8,7 @@ namespace BookStore.PL.MappingProfiles
     {
         public CategoryProfile()
         {
-            CreateMap<CategoryProfile,Category >().ReverseMap();
+            CreateMap<CategoryViewModel,Category >().ReverseMap();
         }
     }
 }

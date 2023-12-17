@@ -1,0 +1,21 @@
+﻿@model BookViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<br />
+<h1>Edit @Model.Title Details</h1>
+<br />
+
+<form asp-action="Edit" enctype="multipart/form-data">
+    <partial name="PartialViews/_CreateEditPartialView" />
+
+    <input type="submit" value="Save" class="btn btn-primary" />
+    <a asp-action="Index" asp-controller="Book" class="btn btn-secondary">Back To List</a>
+</form>
+
+@section Scripts
+{
+    <partial name ="_ValidationScriptsPartial" />
+}

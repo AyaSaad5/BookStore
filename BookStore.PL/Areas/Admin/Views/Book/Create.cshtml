@@ -1,0 +1,24 @@
+﻿@model BookViewModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<br />
+<h1>Add New Book</h1>
+<br />
+
+<form asp-action="Create" enctype="multipart/form-data">
+
+    <partial name="PartialViews/_CreateEditPartialView" />
+
+    <br />
+    <input type="submit" value="Submit" class="btn btn-primary" />
+    <a asp-action="Index" asp-controller="Book" class="btn btn-secondary">Back To List</a>
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
+

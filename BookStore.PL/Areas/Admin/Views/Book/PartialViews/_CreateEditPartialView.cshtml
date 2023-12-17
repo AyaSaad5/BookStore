@@ -1,0 +1,62 @@
+﻿@using BookStore.BLL.Interfaces
+@model BookViewModel
+@inject IUnitOfWork unitofwork
+@{
+    var CategryList = new SelectList(await unitofwork.CategoryRepository.GetAllAsync(), "CategoryId", "Name");
+    var CoverList = new SelectList(await unitofwork.CoverTypeRepository.GetAllAsync(), "CoverTypeId", "Name");
+
+}
+<input class="form-control" asp-for="ImageName" hidden />
+
+<div class="form-group">
+    <label class="col-form-label" asp-for="Title"></label>
+    <input class="form-control" asp-for="Title" />
+    <span asp-validation-for="Title" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label class="col-form-label" asp-for="Image"></label>
+    <input class="form-control" asp-for="Image" />
+
+</div>
+
+<div class="form-group">
+    <label class="col-form-label" asp-for="Description"></label>
+    <input class="form-control" asp-for="Description" />
+</div>
+
+<div class="form-group">
+    <label class="col-form-label" asp-for="ISBN"></label>
+    <input class="form-control" asp-for="ISBN" />
+</div>
+
+<div class="form-group">
+    <label class="col-form-label" asp-for="Category"></label>
+    <select class="form-control" asp-items="@CategryList" asp-for="CategoryId">
+        <option value="@null">
+            ---- Select Category ----
+        </option>
+    </select>
+
+    <label class="col-form-label" asp-for="CoverType"></label>
+    <select class="form-control" asp-items="@CoverList" asp-for="CoverTypeId">
+        <option value="@null">
+            ---- Select Cover Type ----
+        </option>
+    </select>
+</div>
+<div class="form-group">
+    <label class="col-form-label" asp-for="Author"></label>
+    <input class="form-control" asp-for="Author" />
+    <span asp-validation-for="Author" class="text-danger"></span>
+
+</div>
+
+
+
+<div class="form-group">
+    <label class="col-form-label" asp-for="Price"></label>
+    <input class="form-control" asp-for="Price" />
+</div>
+
+
