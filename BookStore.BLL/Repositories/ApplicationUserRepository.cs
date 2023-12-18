@@ -2,8 +2,6 @@
 using BookStore.DAL.Contexts;
 using BookStore.DAL.Models;
 using BulkyBook.BLL.Interfaces;
-using BulkyBook.DAL.Context;
-using BulkyBook.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
