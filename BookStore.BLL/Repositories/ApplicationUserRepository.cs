@@ -1,7 +1,7 @@
 ﻿using BookStore.BLL.Repositories;
+﻿using BookStore.BLL.Interfaces;
 using BookStore.DAL.Contexts;
 using BookStore.DAL.Models;
-using BulkyBook.BLL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
