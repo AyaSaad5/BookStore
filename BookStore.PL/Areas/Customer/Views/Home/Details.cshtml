@@ -13,14 +13,14 @@
     <input hidden asp-for="@Model.Id" />
     <div class="card container p-1">
 
-        <div class="card-header bg-success text-light m-lg-0 row mt-1">
+        <div class="card-header bg-dark text-light m-lg-0 row mt-1">
             <div class="col-12 col-md-6">
-                <h1 class="text-white-50">@Model.Title</h1>
-                <p class="text-black-50">by @Model.Author</p>
+                <h1 class="text-white">@Model.Title</h1>
+                <p class="text-white-50">by @Model.Author</p>
             </div>
             <div class="col-12 col-md-6 text-end pt-4">
-                <span class="text-success badge bg-white pt-2" style="height:30px">@Model.CoverType.Name</span>
-                <span class="text-success badge bg-white pt-2" style="height:30px">@Model.Category.Name</span>
+                <span class="text-dark badge bg-white pt-2" style="height:30px">@Model.CoverType.Name</span>
+                <span class="text-dark badge bg-white pt-2" style="height:30px">@Model.Category.Name</span>
             </div>
         </div>
 
@@ -67,14 +67,14 @@
                             <p class="text-secondary">@Model.Description</p>
                         </div>
                         <div class="row pl-2">
-                            <div class="col-2 text-primary"><h4>Count</h4></div>
-                            <div class="col-10"> <input class="form-control"/> </div>
+                            <div class="col-2 text-dark"><h4>Count</h4></div>
+                            <div class="col-10"> <input class="form-control" /> </div>
                         </div>
 
                     </div>
 
                     <div class="col-12 col-lg-3 offset-lg-1 text-center">
-                        <img src="" width="100%" class="rounded" />
+                        <img src="~/files/Images/@Model.ImageName" width="100%" class="rounded" />
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                     <a class="btn btn-secondary form-control" style="height:50px" asp-action="index">Back To Home</a>
                 </div>
                 <div class="col-12 col-md-6 pb-1">
-                    <button type="submit" value="Add To Cart" class="btn btn-success form-control" style="height:50px">Add To Cart</button>
+                    <button type="submit" value="Add To Cart" class="btn btn-dark form-control" style="height:50px">Add To Cart</button>
                 </div>
             </div>
         </div>

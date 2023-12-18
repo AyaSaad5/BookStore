@@ -37,6 +37,22 @@ namespace BookStore.PL.Areas.Customer.Controllers
             return View(MappedBooks);
         }
 
+
+        public async Task< IActionResult> Details(int ? id)
+        {
+            if (id is null)
+                return BadRequest();
+
+            var books = await _unitofwork.BookRepository.GetAllAsync();
+            if (books is null)
+                return NotFound();
+
+            var book = books.Where(b => b.Id == id).FirstOrDefault();
+            var MappedBook = _mapper.Map<Book, BookViewModel>(book);
+            return View(MappedBook);
+        }
+
+
         public IActionResult Privacy()
         {
             return View();
@@ -46,18 +62,6 @@ namespace BookStore.PL.Areas.Customer.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        public async Task< IActionResult> Details(int ? id)
-        {
-            if (id is null)
-                return BadRequest();
-            var books = await _unitofwork.BookRepository.GetAllAsync();
-            if (books is null)
-                return NotFound();
-            var book = books.Where(b => b.Id == id).FirstOrDefault();
-            var MappedBook = _mapper.Map<Book, BookViewModel>(book);
-            return View(MappedBook);
         }
     }
 }
