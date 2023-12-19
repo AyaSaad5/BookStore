@@ -17,6 +17,8 @@ namespace BookStore.PL.ViewModels
 
         public string Author { get; set; }
         public double Price { get; set; }
+        public double CommessionPrice { get; set; } =  0.2;
+
         public double Price5 { get; set; }
         public double Price10 { get; set; }
         public string ImageName { get; set; }

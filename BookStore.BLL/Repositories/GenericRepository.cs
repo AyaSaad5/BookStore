@@ -37,6 +37,7 @@ namespace BookStore.BLL.Repositories
 
         public async Task<T> GetByIdAsync(int id)
         {
+
             return await _dbContext.Set<T>().FindAsync(id);
         }
 

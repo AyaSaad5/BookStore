@@ -41,6 +41,9 @@
     <td>@Html.DisplayNameFor(B => B.CoverType)</td>
     <td>@Html.DisplayNameFor(B => B.ISBN)</td>
     <td>@Html.DisplayNameFor(B => B.Price)</td>
+    <td>@Html.DisplayNameFor(B => B.Price5)</td>
+    <td>@Html.DisplayNameFor(B => B.Price10)</td>
+
     </thead>
 
     <tbody>
@@ -56,7 +59,9 @@
 
                 <td>@book.ISBN</td>
                 <td>@book.Price</td>
-               
+                <td>@book.Price5</td>
+                <td>@book.Price10</td>
+
 
                 <partial name="_ButtonsView" model="@book.Id" />
             </tr>

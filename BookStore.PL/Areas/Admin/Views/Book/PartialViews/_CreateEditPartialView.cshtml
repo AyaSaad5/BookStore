@@ -37,7 +37,9 @@
             ---- Select Category ----
         </option>
     </select>
+ </div>
 
+<div class="form-group">
     <label class="col-form-label" asp-for="CoverType"></label>
     <select class="form-control" asp-items="@CoverList" asp-for="CoverTypeId">
         <option value="@null">
@@ -45,6 +47,7 @@
         </option>
     </select>
 </div>
+
 <div class="form-group">
     <label class="col-form-label" asp-for="Author"></label>
     <input class="form-control" asp-for="Author" />
@@ -57,6 +60,17 @@
 <div class="form-group">
     <label class="col-form-label" asp-for="Price"></label>
     <input class="form-control" asp-for="Price" />
+</div>
+
+
+<div class="form-group">
+    <label class="col-form-label" asp-for="Price5"></label>
+    <input class="form-control" asp-for="Price5" />
+</div>
+
+<div class="form-group">
+    <label class="col-form-label" asp-for="Price10"></label>
+    <input class="form-control" asp-for="Price10" />
 </div>
 
 

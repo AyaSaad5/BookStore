@@ -2,10 +2,13 @@ using AutoMapper;
 using BookStore.BLL.Interfaces;
 using BookStore.BLL.Repositories;
 using BookStore.DAL.Contexts;
+using BookStore.DAL.Models;
 using BookStore.PL.MappingProfiles;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,7 +41,27 @@ namespace BookStore.PL
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper(M => M.AddProfiles(new List <Profile>() { new CategoryProfile(), new BookProfile() }));
-        }
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(Options =>
+            {
+                Options.Password.RequireDigit = true;
+                Options.Password.RequireLowercase = true;
+                Options.Password.RequireUppercase = true;
+
+            })
+                   .AddEntityFrameworkStores<BookStoreDbContext>()
+                   .AddDefaultTokenProviders();
+
+
+			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(Options =>
+			{
+				Options.LoginPath = "Account/login";
+				Options.AccessDeniedPath = "Home/Error";
+
+			});
+
+
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -58,13 +81,14 @@ namespace BookStore.PL
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{area=Identity}/{controller=Account}/{action=Login}/{id?}");
             });
         }
     }
